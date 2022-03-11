@@ -3,7 +3,7 @@ package ahmadirfaanhibatullah.spring.core;
 import ahmadirfaanhibatullah.spring.core.data.Bar;
 import ahmadirfaanhibatullah.spring.core.data.Foo;
 import ahmadirfaanhibatullah.spring.core.data.FooBar;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -17,7 +17,13 @@ import org.springframework.context.annotation.Primary;
 public class DependencyInjectionConfiguration {
 
     @Bean()
-    public Foo foo() {
+    @Primary
+    public Foo fooFirst() {
+        return new Foo();
+    }
+
+    @Bean()
+    public Foo fooSecond() {
         return new Foo();
     }
 
@@ -27,7 +33,7 @@ public class DependencyInjectionConfiguration {
     }
 
     @Bean
-    public FooBar fooBar(Foo foo, Bar bar) {
+    public FooBar fooBar(@Qualifier("fooSecond") Foo foo, Bar bar) {
         return new FooBar(foo, bar);
     }
 }

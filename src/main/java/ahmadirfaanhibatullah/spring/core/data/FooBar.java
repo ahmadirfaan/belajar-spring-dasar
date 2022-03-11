@@ -1,7 +1,4 @@
-/**
- * dana.id.
- * Copyright (c) 2017‐2022 All Rights Reserved.
- */
+
 package ahmadirfaanhibatullah.spring.core.data;
 
 import lombok.AllArgsConstructor;
