@@ -11,20 +11,20 @@ import java.util.UUID;
 
 /**
  * @author Ahmad Irfaan Hibatullah
- * @version $Id: IdGeneratorBeanPostProcessor.java, v 0.1 2022‐03‐13 05.57 Ahmad Irfaan Hibatullah Exp $$
+ * @version $Id: PrefixIdGeneratorBeanPostProcessor.java, v 0.1 2022‐03‐13 06.10 Ahmad Irfaan Hibatullah Exp $$
  */
 
 @Slf4j
 @Component
-public class IdGeneratorBeanPostProcessor implements BeanPostProcessor, Ordered {
+public class PrefixIdGeneratorBeanPostProcessor implements BeanPostProcessor, Ordered  {
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        log.info("Id Generator Processor");
+        log.info("Prefix Id Generator Processor");
         if(bean instanceof IdAware) {
-            log.info("Set Id Generator Processor for Bean {}", beanName);
+            log.info("{refoxSet Id Generator Processor for Bean {}", beanName);
             IdAware idAware = (IdAware) bean;
-            idAware.setId(UUID.randomUUID().toString());
+            idAware.setId("IRF-" + idAware.getId());
         }
         return bean;
     }
